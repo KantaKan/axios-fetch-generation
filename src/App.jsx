@@ -18,6 +18,9 @@ function App() {
     setLoading(true);
     try {
       const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error(`http request error ${response.status}`);
+      }
       const jsonData = await response.json();
       setData(jsonData);
       console.log(jsonData);
