@@ -15,20 +15,7 @@ function App() {
   const [url, setUrl] = useState(pokeonURL);
 
   const fetchData = async () => {
-    setLoading(true);
-    try {
-      const response = await fetch(url);
-      if (!response.ok) {
-        throw new Error(`http request error ${response.status}`);
-      }
-      const jsonData = await response.json();
-      setData(jsonData);
-      console.log(jsonData);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setLoading(false);
-    }
+    //putsomecode to thiss
   };
 
   const handleSwitch = () => {
