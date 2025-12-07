@@ -58,7 +58,7 @@ function App() {
       ) : (
         <div className="flex flex-col w-auto gap-12">
           <Formxdd onUserCreated={fetchData} />
-          <div className="grid grid-cols-4 gap-4">{data && Array.isArray(data) && data.map((e, index) => <StudenPost key={index} name={e.name} description={e.description} profilePicURL={e.profilePicURL} />)}</div>
+          <div className="grid grid-cols-4 gap-4">{data && Array.isArray(data) && data.map((e, index) => <StudenPost key={index} name={e.name} description={e.description} profilePicURL={e.profilePicURL} id={e.id} />)}</div>
         </div>
       )}
     </div>

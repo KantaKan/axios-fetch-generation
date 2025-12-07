@@ -1,6 +1,6 @@
 import React from "react";
 
-const StudenPost = ({ name, description, profilePicURL }) => {
+const StudenPost = ({ name, description, profilePicURL, id }) => {
   return (
     <div className="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden max-w-sm w-full transform hover:-translate-y-2">
       <div className="relative w-full h-64 overflow-hidden">
