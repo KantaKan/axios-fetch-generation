@@ -7,7 +7,7 @@ import Formxdd from "./components/form";
 
 function App() {
   const pokeonURL = "https://pokeapi.co/api/v2/pokemon/snorlax";
-  const backendURL = "http://localhost:3000/api/users";
+  const backendURL = "https://memory-backend-forjsd11.onrender.com/api/users";
 
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(null);
