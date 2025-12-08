@@ -1,6 +1,13 @@
 import React from "react";
 
-const StudenPost = ({ name, description, profilePicURL, id }) => {
+const StudenPost = ({ name, description, profilePicURL, id, onDelete }) => {
+  const handleDelete = async () => {
+    const isConfirm = confirm("ลบใช่ไหมม");
+    if (!isConfirm) return;
+    /// เขียนโค้ดตรงนี้ ลบนะ DELETE
+    onDelete();
+  };
+
   return (
     <div className="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden max-w-sm w-full transform hover:-translate-y-2">
       <div className="relative w-full h-64 overflow-hidden">
@@ -13,6 +20,9 @@ const StudenPost = ({ name, description, profilePicURL, id }) => {
 
         <p className="text-gray-600 leading-relaxed line-clamp-3 group-hover:text-gray-800 transition-colors duration-300">{description}</p>
 
+        <button className="bg-red-500 w-full" onClick={handleDelete}>
+          delete this
+        </button>
         <div className="mt-6 h-1 bg-gradient-to-r from-orange-400 via-amber-500 to-orange-400 rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
       </div>
     </div>

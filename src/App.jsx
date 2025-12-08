@@ -6,7 +6,7 @@ import StudenPost from "./components/post";
 import Formxdd from "./components/form";
 
 function App() {
-  const pokeonURL = "https://pokeapi.co/api/v2/pokemon/ditto";
+  const pokeonURL = "https://pokeapi.co/api/v2/pokemon/snorlax";
   const backendURL = "http://localhost:3000/api/users";
 
   const [data, setData] = useState(null);
@@ -45,7 +45,7 @@ function App() {
       ) : (
         <div className="flex flex-col w-auto gap-12">
           <Formxdd onUserCreated={fetchData} />
-          <div className="grid grid-cols-4 gap-4">{data && Array.isArray(data) && data.map((e, index) => <StudenPost key={index} name={e.name} description={e.description} profilePicURL={e.profilePicURL} id={e.id} />)}</div>
+          <div className="grid grid-cols-4 gap-4">{data && Array.isArray(data) && data.map((e) => <StudenPost key={e.id} {...e} onDelete={fetchData} />)}</div>
         </div>
       )}
     </div>
