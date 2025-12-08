@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { createUser } from "../lib/fetch";
+// import { createUser } from "../lib/fetch";
 
 const Formxdd = ({ onUserCreated }) => {
   const [formData, setFormData] = useState({
@@ -21,7 +21,7 @@ const Formxdd = ({ onUserCreated }) => {
     e.preventDefault();
     setLoading(true);
     try {
-      await createUser(formData);
+      // await createUser(formData);
       console.log(formData);
       setFormData({
         name: "",
