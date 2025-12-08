@@ -1,10 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 
 const StudenPost = ({ name, description, profilePicURL, id, onDelete }) => {
+  const [isEditing, setIsEditing] = useState(false);
+  const [localName, setLocalName] = useState(name);
+  const [localDescription, setLocalDescription] = useState(description);
+  const [localProfilePicURL, setLocalProfilePicURL] = useState(profilePicURL);
+
   const handleDelete = async () => {
     const isConfirm = confirm("ลบใช่ไหมม");
     if (!isConfirm) return;
     /// เขียนโค้ดตรงนี้ ลบนะ DELETE
+    onDelete();
+  };
+
+  const handleEditClick = () => {
+    setLocalName(name);
+    setLocalDescription(description);
+    setLocalProfilePicURL(profilePicURL);
+    setIsEditing(true);
+  };
+
+  const handleConfirm = async () => {
+    //เขียนโค้ดตรงนี้้ Put
+    setIsEditing(false);
+
     onDelete();
   };
 
@@ -16,11 +35,35 @@ const StudenPost = ({ name, description, profilePicURL, id, onDelete }) => {
       </div>
 
       <div className="relative p-6">
-        <h1 className="text-2xl font-bold text-gray-800 mb-3 group-hover:text-orange-600 transition-colors duration-300">{name}</h1>
+        {isEditing ? (
+          <div className="space-y-3">
+            <input className="w-full rounded border px-3 py-2 text-gray-800" value={localName} onChange={(e) => setLocalName(e.target.value)} placeholder="Name" />
+            <textarea className="w-full rounded border px-3 py-2 text-gray-800" value={localDescription} onChange={(e) => setLocalDescription(e.target.value)} placeholder="Description" rows={3} />
+            <input className="w-full rounded border px-3 py-2 text-gray-800" value={localProfilePicURL} onChange={(e) => setLocalProfilePicURL(e.target.value)} placeholder="Profile image URL" />
+            <div className="flex gap-2">
+              <button className="bg-green-500 text-white px-3 py-2 rounded" onClick={handleConfirm}>
+                Confirm
+              </button>
+              <button className="bg-gray-300 px-3 py-2 rounded" onClick={() => setIsEditing(false)}>
+                Cancel
+              </button>
+            </div>
+          </div>
+        ) : (
+          <>
+            <h1 className="text-2xl font-bold text-gray-800 mb-3 group-hover:text-orange-600 transition-colors duration-300">{localName}</h1>
 
-        <p className="text-gray-600 leading-relaxed line-clamp-3 group-hover:text-gray-800 transition-colors duration-300">{description}</p>
+            <p className="text-gray-600 leading-relaxed line-clamp-3 group-hover:text-gray-800 transition-colors duration-300">{localDescription}</p>
+          </>
+        )}
 
-        <button className="bg-red-500 w-full" onClick={handleDelete}>
+        {!isEditing && (
+          <button className="bg-blue-500 text-white w-full mt-4 py-2 rounded" onClick={handleEditClick}>
+            Edit
+          </button>
+        )}
+
+        <button className="bg-red-500 w-full mt-3 py-2 rounded text-white" onClick={handleDelete}>
           delete this
         </button>
         <div className="mt-6 h-1 bg-gradient-to-r from-orange-400 via-amber-500 to-orange-400 rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
