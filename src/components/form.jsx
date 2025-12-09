@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 // import { createUser } from "../lib/fetch";
-
+import axios from "axios";
 const Formxdd = ({ onUserCreated }) => {
   const [formData, setFormData] = useState({
     name: "",
@@ -21,8 +21,8 @@ const Formxdd = ({ onUserCreated }) => {
     e.preventDefault();
     setLoading(true);
     try {
-      // เขียนโค้ดตรงนี้ๆๆๆๆๆ createuser
-      console.log(formData);
+      const response = await axios.post("https://memory-backend-forjsd11.onrender.com/api/users", formData);
+      console.log(response);
       setFormData({
         name: "",
         description: "",

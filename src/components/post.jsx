@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 
 const StudenPost = ({ name, description, profilePicURL, id, onDelete }) => {
   const [isEditing, setIsEditing] = useState(false);
@@ -7,9 +8,9 @@ const StudenPost = ({ name, description, profilePicURL, id, onDelete }) => {
   const [localProfilePicURL, setLocalProfilePicURL] = useState(profilePicURL);
 
   const handleDelete = async () => {
-    const isConfirm = confirm("ลบใช่ไหมม");
+    const isConfirm = confirm("เป็นแฟนกันนะ");
     if (!isConfirm) return;
-    /// เขียนโค้ดตรงนี้ ลบนะ DELETE
+    const response = await axios.delete(`https://memory-backend-forjsd11.onrender.com/api/users/${id}`);
     onDelete();
   };
 
@@ -21,7 +22,7 @@ const StudenPost = ({ name, description, profilePicURL, id, onDelete }) => {
   };
 
   const handleConfirm = async () => {
-    //เขียนโค้ดตรงนี้้ Put
+    //เขียนโค้ดตรงนี้้ Put method
     setIsEditing(false);
 
     onDelete();

@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import Pokemon from "./components/poke-card";
 import StudenPost from "./components/post";
 import Formxdd from "./components/form";
+import axios from "axios";
 
 function App() {
   const pokeonURL = "https://pokeapi.co/api/v2/pokemon/snorlax";
@@ -15,8 +16,17 @@ function App() {
   const [url, setUrl] = useState(pokeonURL);
 
   const fetchData = async () => {
-    //putsomecode to thiss
+    setLoading(true);
+    try {
+      let response = await axios.get(url);
+      setData(response.data);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
   };
+  console.log(data);
 
   const handleSwitch = () => {
     setView(!view);
@@ -33,7 +43,7 @@ function App() {
   }, [url]);
 
   return (
-    <div className="h-screen w-screen flex flex-col justify-center items-center text-center bg-orange-400 gap-12">
+    <div className=" w-screen flex flex-col justify-center items-center text-center min-h-dvh bg-orange-400 gap-12">
       <button className="font-bold rounded-4xl bg-amber-50 w-24" onClick={handleSwitch}>
         Switch
       </button>
@@ -43,7 +53,7 @@ function App() {
           {data && <Pokemon data={data} />}
         </>
       ) : (
-        <div className="flex flex-col w-auto gap-12">
+        <div className="flex flex-col  gap-12">
           <Formxdd onUserCreated={fetchData} />
           <div className="grid grid-cols-4 gap-4">{data && Array.isArray(data) && data.map((e) => <StudenPost key={e.id} {...e} onDelete={fetchData} />)}</div>
         </div>
